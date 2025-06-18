@@ -162,7 +162,7 @@ $recent_races = $conn->query(" SELECT * FROM usersinfo  ");;
   <div class="username"><?= htmlspecialchars($username ?: 'Guest') ?></div>
   <div class="email"><?= htmlspecialchars($email ?: 'Not logged in') ?></div>
 </div>
-            <a href="Login/logout.php">Logout</a>
+            <a href="logout.php">Logout</a>
 
            
           </div>
