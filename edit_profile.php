@@ -2,7 +2,6 @@
 session_start();
 include 'config.php';
 
-// Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -11,7 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $success = $error = "";
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $first_name = $_POST['first_name'] ?? '';
     $last_name  = $_POST['last_name'] ?? '';
@@ -22,13 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("sssii", $first_name, $last_name, $gender, $age, $userId);
 
     if ($stmt->execute()) {
-        $success = "Profile updated successfully.";
+        header("Location: home_pg.php");
     } else {
         $error = "Error updating profile.";
     }
 }
 
-// Fetch user data
 $stmt = $conn->prepare("SELECT first_name, last_name, Gender, Age, Email FROM usersInfo WHERE id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
@@ -46,7 +43,7 @@ $user = $result->fetch_assoc();
   <style>
     body {
       font-family: Arial, sans-serif;
-      background:rgb(0, 0, 0);
+  background-color: #0d0d0d;
       color: #fff;
       display: flex;
       justify-content: center;
@@ -54,12 +51,13 @@ $user = $result->fetch_assoc();
       height: 100vh;
     }
     .profile-box {
-      background: #fff;
       color: #000;
+        background-color:rgb(0, 0, 0);
+
       padding: 30px;
       border-radius: 12px;
-      width: 400px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      width: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
     }
     h2 {
       text-align: center;
@@ -71,6 +69,8 @@ $user = $result->fetch_assoc();
       font-weight: bold;
     }
     input, select {
+        background: #2b2b2b;
+
       width: 100%;
       padding: 10px;
       margin-top: 6px;
