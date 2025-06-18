@@ -2,8 +2,10 @@
 include 'config.php';
 session_start();
 $loggedIn = isset($_SESSION['user_id']);
-$username = $loggedIn && isset($_SESSION['first_name']) ? $_SESSION['first_name'] : '';
-$email = $loggedIn && isset($_SESSION['email']) ? $_SESSION['email'] : ''; 
+$username = $loggedIn ? $_SESSION['first_name'] : '';
+$email = $loggedIn ? $_SESSION['email'] : '';
+
+$recent_races = $conn->query(" SELECT * FROM usersinfo  ");; 
 
 
 ?>
